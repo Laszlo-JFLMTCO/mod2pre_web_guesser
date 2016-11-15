@@ -4,7 +4,7 @@ require 'sinatra/reloader'
 number_guesser = NumberGuesser.new
 
 get "/" do
-  "The SECRET NUMBER is #{number_guesser.secret_number}"
+  erb:index, :locals => {:secret_number => number_guesser.secret_number}
 end
 
 class NumberGuesser
