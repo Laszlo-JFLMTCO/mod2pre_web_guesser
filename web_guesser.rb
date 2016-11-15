@@ -1,10 +1,21 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+number_guesser = NumberGuesser.new
+
 get "/" do
-  "The SECRET NUMBER is #{pick_secret_number}"
+  "The SECRET NUMBER is #{number_guesser.secret_number}"
 end
 
-def pick_secret_number(max = 100)
-  rand(max + 1)
+class NumberGuesser
+  attr_reader :secret_number
+
+  def initialize(max = 100)
+    @secret_number = pick_secret_number(max)
+  end
+
+  def pick_secret_number(max)
+    rand(max + 1)
+  end
+
 end
