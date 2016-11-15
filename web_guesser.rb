@@ -1,7 +1,8 @@
 require 'sinatra'
+require 'sinatra/reloader'
 
 get "/" do
-  "The secret number is #{pick_secret_number}"
+  "The SECRET NUMBER is #{pick_secret_number}"
 end
 
 def pick_secret_number(max = 100)
