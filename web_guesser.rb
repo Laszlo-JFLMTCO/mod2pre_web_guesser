@@ -1,21 +1,12 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require_relative 'number_guesser'
 
 number_guesser = NumberGuesser.new
 
 get "/" do
-  erb:index, :locals => {:secret_number => number_guesser.secret_number}
+  guess_evaluation = number_guesser.evaluation(params["guess"])
+  # throw guess_evaluation.inspect
+  erb:index, :locals => {:last_guess => guess_evaluation["feedback"], :secret_number_message => guess_evaluation["secret_number"]}
 end
 
-class NumberGuesser
-  attr_reader :secret_number
-
-  def initialize(max = 100)
-    @secret_number = pick_secret_number(max)
-  end
-
-  def pick_secret_number(max)
-    rand(max + 1)
-  end
-
-end
